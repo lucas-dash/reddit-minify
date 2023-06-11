@@ -2,7 +2,7 @@ import Posts from '../features/posts/Posts';
 
 const Content = () => {
   return (
-    <main className=" border-1 border-secondary">
+    <main className="border-1 border-secondary">
       <Posts />
     </main>
   );
