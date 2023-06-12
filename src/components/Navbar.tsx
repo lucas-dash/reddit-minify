@@ -4,11 +4,12 @@ import Search from '../features/search/Search';
 import { FiUser } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { setSubreddit } from '../features/posts/postsSlice';
+import { AppDispatch } from '../app/store';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <header className="h-16 bg-background w-full flex items-center px-4">

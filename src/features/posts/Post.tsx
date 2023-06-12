@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { setSubreddit } from './postsSlice';
+import { AppDispatch } from '../../app/store';
 
 const Post = ({
   author,
@@ -19,9 +20,7 @@ const Post = ({
   url,
   secure_media,
 }: PostType) => {
-  const dispatch = useDispatch();
-
-  console.log(secure_media);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <article className="min-w-[300px] w-full max-w-[740px] bg-background text-secondary p-4 rounded-2xl">
@@ -49,7 +48,7 @@ const Post = ({
       </div>
 
       <div>
-        {secure_media && (
+        {secure_media && secure_media.reddit_video && (
           <video
             src={secure_media.reddit_video.fallback_url}
             controls
@@ -72,7 +71,7 @@ const Post = ({
 
         {!url.includes('youtube') && !url.includes('youtu.be') && (
           <a
-            className="text-details hover:text-primary line-clamp-5"
+            className="text-details hover:text-primary pt-1 break-words"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
@@ -100,7 +99,7 @@ const Post = ({
         >
           r/{subreddit}
         </button>
-        <button className="flex items-center gap-2 hover:scale-105 active:scale-95 transition-all">
+        <button className="flex bg-transparent items-center gap-2 hover:scale-105 active:scale-95 transition-all">
           view more <FiMaximize2 />
         </button>
       </div>

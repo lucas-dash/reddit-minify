@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { RootState } from '../../app/store';
 
 const postsSlice = createSlice({
   name: 'subreddit',
@@ -7,7 +8,7 @@ const postsSlice = createSlice({
     subreddit: 'r/popular',
   },
   reducers: {
-    setSubreddit: (state, action) => {
+    setSubreddit: (state, action: PayloadAction<string>) => {
       state.subreddit = action.payload;
     },
   },
@@ -15,7 +16,7 @@ const postsSlice = createSlice({
 
 export const { setSubreddit } = postsSlice.actions;
 
-export const selectSubreddit = (state) => state.subreddit.subreddit;
+export const selectSubreddit = (state: RootState) => state.subreddit.subreddit;
 
 export default postsSlice.reducer;
 

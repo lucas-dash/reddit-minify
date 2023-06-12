@@ -1,18 +1,18 @@
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
-import App from './App';
+import Navbar from './components/Navbar';
 
-describe('App', () => {
-  it('Renders Hello World', () => {
+describe('Navbar', () => {
+  it('Renders Popular', () => {
     // ARANGE
-    render(<App />);
+    render(<Navbar />);
     // ACT
     // EXPECT
     expect(
-      screen.getByRole('heading', {
+      screen.getByRole('listitem', {
         level: 1,
       })
-    ).toHaveTextContent('Hello world');
+    ).toHaveTextContent('Popular');
   });
 });

@@ -12,12 +12,34 @@ type apiPost = {
 const Posts = () => {
   const subreddit = useSelector(selectSubreddit);
 
-  const { data: Posts, isLoading } = useGetSubredditQuery(subreddit);
+  const { data: Posts, isLoading, isError } = useGetSubredditQuery(subreddit);
   console.log(Posts);
   return (
     <section className="flex flex-col items-center gap-5">
+      {isError && (
+        <div className="alert alert-error">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>Error! Failed to load posts.</span>
+        </div>
+      )}
       {isLoading ? (
-        <Loading />
+        <>
+          <Loading />
+          <Loading />
+          <Loading />
+        </>
       ) : (
         Posts?.data.children.map((post: apiPost) => {
           const { data } = post;
