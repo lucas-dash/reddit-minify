@@ -89,7 +89,7 @@ const Post = ({
           <p className="font-semibold text-sm text-primary">{ups}</p>
           <FiChevronDown size={20} />
         </div>
-        <button className="flex items-center w-max gap-1 text-sm text-details active:scale-95 transition-all">
+        <button className="flex items-center w-max gap-1 bg-transparent text-sm text-details active:scale-95 transition-all">
           <FiMessageSquare size={20} style={{ color: 'black' }} />
           {commentFormater(num_comments)} comments
         </button>

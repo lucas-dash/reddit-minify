@@ -1,18 +1,20 @@
-import { useState } from 'react';
 import reddit from '../assets/reddit.svg';
 import Search from '../features/search/Search';
 import { FiUser } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { setSubreddit } from '../features/posts/postsSlice';
 import { AppDispatch } from '../app/store';
+import { useState } from 'react';
+import Sidebar from './Sidebar';
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
   const dispatch = useDispatch<AppDispatch>();
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <header className="h-16 bg-background w-full flex items-center px-4">
+    <header className="h-16 bg-background w-full flex items-center px-4 sticky top-0 shadow-md z-50">
+      {open && <Sidebar />}
+
       <nav className="flex items-center justify-start sm:justify-between gap-4 w-full">
         <label
           className="btn btn-neutral hover:btn-primary text-secondary btn-circle swap swap-rotate sm:hidden"
@@ -53,7 +55,7 @@ const Navbar = () => {
           </h3>
         </div>
 
-        <ul className="hidden sm:flex flex-col sm:flex-row gap-2 text-secondary font-semibold">
+        <ul className="hidden sm:flex flex-col sm:flex-row gap-2 md:gap-4 text-secondary font-semibold">
           <li>
             <button
               onClick={() => dispatch(setSubreddit('r/popular'))}
