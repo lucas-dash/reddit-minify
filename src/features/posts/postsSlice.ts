@@ -25,7 +25,7 @@ export const subredditApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://www.reddit.com/' }),
   endpoints: (builder) => ({
     getSubreddit: builder.query({
-      query: (name) => `${name}.json`,
+      query: (name: string) => `${name}.json`,
     }),
   }),
 });

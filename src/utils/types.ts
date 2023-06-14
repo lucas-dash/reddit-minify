@@ -8,23 +8,20 @@ export type PostType = {
   subreddit: string;
   ups: number;
   url: string;
-  video: string;
   secure_media: securemediaType;
 };
 
-type securemediaType = {
-  reddit_video: videoType;
+export type securemediaType = {
+  reddit_video: { fallback_url: string };
 };
 
-type videoType = {
-  fallback_url: string;
+export type CommentsType = {
+  data: Comments;
 };
 
-// type preview = {
-//     images:
-// }
-
-// type previewImg = {
-//     id: string,
-
-// }
+export type Comments = {
+  id: string;
+  author: string;
+  body: string;
+  created_utc: number;
+};

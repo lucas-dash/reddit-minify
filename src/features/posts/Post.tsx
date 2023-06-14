@@ -9,6 +9,8 @@ import {
 import { useDispatch } from 'react-redux';
 import { setSubreddit } from './postsSlice';
 import { AppDispatch } from '../../app/store';
+import { useEffect, useState } from 'react';
+import Modal from '../comments/Modal';
 
 const Post = ({
   author,
@@ -19,8 +21,19 @@ const Post = ({
   subreddit,
   url,
   secure_media,
+  permalink,
 }: PostType) => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [open]);
 
   return (
     <article className="min-w-[300px] w-full max-w-[740px] bg-background text-secondary p-4 rounded-2xl">
@@ -41,7 +54,7 @@ const Post = ({
         </a>
         <div className="bg-primary h-[10px] w-[10px] rounded-full"></div>
         <div>
-          <p className="text-details text-sm">
+          <p className="text-details text-sm text-center">
             {formatRelativeTime(created_utc)}
           </p>
         </div>
@@ -89,17 +102,37 @@ const Post = ({
           <p className="font-semibold text-sm text-primary">{ups}</p>
           <FiChevronDown size={20} />
         </div>
-        <button className="flex items-center w-max gap-1 bg-transparent text-sm text-details active:scale-95 transition-all">
+        <button
+          className="flex items-center w-max gap-1 bg-transparent hover:text-secondary text-sm text-details active:scale-95 transition-all"
+          onClick={() => setOpen(true)}
+        >
           <FiMessageSquare size={20} style={{ color: 'black' }} />
           {commentFormater(num_comments)} comments
         </button>
+        {open && (
+          <Modal
+            close={setOpen}
+            permalink={permalink}
+            author={author}
+            created={created_utc}
+            title={title}
+            url={url}
+            secure_media={secure_media}
+            ups={ups}
+            num_comments={num_comments}
+            subreddit={subreddit}
+          />
+        )}
         <button
           className="bg-bgButton rounded-md w-max py-1 px-3 text-details text-sm hover:bg-bgButton/80 active:scale-95 transition-all"
           onClick={() => dispatch(setSubreddit(`r/${subreddit}`))}
         >
           r/{subreddit}
         </button>
-        <button className="flex bg-transparent items-center gap-2 hover:scale-105 active:scale-95 transition-all">
+        <button
+          className="flex bg-transparent items-center gap-2 hover:scale-105 active:scale-95 transition-all"
+          onClick={() => setOpen(true)}
+        >
           view more <FiMaximize2 />
         </button>
       </div>

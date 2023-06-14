@@ -10,17 +10,19 @@ import Sidebar from './Sidebar';
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
     <header className="h-16 bg-background w-full flex items-center px-4 sticky top-0 shadow-md z-50">
       {open && <Sidebar />}
-
       <nav className="flex items-center justify-start sm:justify-between gap-4 w-full">
         <label
           className="btn btn-neutral hover:btn-primary text-secondary btn-circle swap swap-rotate sm:hidden"
           htmlFor="menu"
           aria-label="menu"
-          onClick={() => setOpen(!open)}
+          onClick={() => handleOpen()}
         >
           {/* this hidden checkbox controls the state */}
           <input type="checkbox" id="menu" />

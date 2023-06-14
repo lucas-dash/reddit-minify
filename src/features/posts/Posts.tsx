@@ -14,8 +14,13 @@ const Posts = () => {
 
   const { data: Posts, isLoading, isError } = useGetSubredditQuery(subreddit);
   console.log(Posts);
+
   return (
     <section className="flex flex-col items-center gap-5">
+      <div className="flex justify-start lg:justify-center w-full">
+        <h1 className="font-bold pl-5 lg:pl-0 text-lg">{subreddit}</h1>
+      </div>
+
       {isError && (
         <div className="alert alert-error">
           <svg
