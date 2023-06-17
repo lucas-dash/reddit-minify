@@ -13,7 +13,6 @@ const Posts = () => {
   const subreddit = useSelector(selectSubreddit);
 
   const { data: Posts, isLoading, isError } = useGetSubredditQuery(subreddit);
-  console.log(Posts);
 
   return (
     <section className="flex flex-col items-center gap-5">

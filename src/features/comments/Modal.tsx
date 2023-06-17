@@ -12,6 +12,7 @@ import Comment from './Comment';
 import { setSubreddit } from '../posts/postsSlice';
 import { useDispatch } from 'react-redux';
 import CLoading from './CLoading';
+import { AppDispatch } from '../../app/store';
 
 type ExpandCardProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,10 +39,9 @@ const Modal = ({
   num_comments,
   subreddit,
 }: ExpandCardProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { data: comments, isLoading, isError } = useGetCommentsQuery(permalink);
-  console.log(comments);
 
   return (
     <div className="fixed inset-0 m-0 h-full w-full p-0 bg-secondary/30 overflow-y-hidden z-50 grid place-items-center">

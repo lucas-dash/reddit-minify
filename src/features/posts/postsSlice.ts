@@ -27,7 +27,10 @@ export const subredditApi = createApi({
     getSubreddit: builder.query({
       query: (name: string) => `${name}.json`,
     }),
+    getCommunities: builder.query({
+      query: () => 'subreddits.json',
+    }),
   }),
 });
 
-export const { useGetSubredditQuery } = subredditApi;
+export const { useGetSubredditQuery, useGetCommunitiesQuery } = subredditApi;

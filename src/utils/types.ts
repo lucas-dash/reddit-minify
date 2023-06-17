@@ -25,3 +25,7 @@ export type Comments = {
   body: string;
   created_utc: number;
 };
+
+export type CommunityType = {
+  data: { id: string; banner_img: string; display_name_prefixed: string };
+};
