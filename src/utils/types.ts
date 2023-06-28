@@ -29,3 +29,16 @@ export type Comments = {
 export type CommunityType = {
   data: { id: string; banner_img: string; display_name_prefixed: string };
 };
+
+export type ExpandCardProps = {
+  close: React.Dispatch<React.SetStateAction<boolean>>;
+  permalink: string;
+  author: string;
+  created: number;
+  title: string;
+  url: string;
+  secure_media: securemediaType;
+  ups: number;
+  num_comments: number;
+  subreddit: string;
+};

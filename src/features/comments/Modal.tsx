@@ -1,5 +1,5 @@
 import { commentFormater, formatRelativeTime } from '../../utils/functions';
-import { CommentsType, securemediaType } from '../../utils/types';
+import { CommentsType, ExpandCardProps } from '../../utils/types';
 import { useGetCommentsQuery } from './commentsSlice';
 import {
   FiChevronDown,
@@ -13,19 +13,7 @@ import { setSubreddit } from '../posts/postsSlice';
 import { useDispatch } from 'react-redux';
 import CLoading from './CLoading';
 import { AppDispatch } from '../../app/store';
-
-type ExpandCardProps = {
-  close: React.Dispatch<React.SetStateAction<boolean>>;
-  permalink: string;
-  author: string;
-  created: number;
-  title: string;
-  url: string;
-  secure_media: securemediaType;
-  ups: number;
-  num_comments: number;
-  subreddit: string;
-};
+import { motion } from 'framer-motion';
 
 const Modal = ({
   close,
@@ -45,7 +33,14 @@ const Modal = ({
 
   return (
     <div className="fixed inset-0 m-0 h-full w-full p-0 bg-secondary/30 overflow-y-hidden z-50 grid place-items-center">
-      <article className="w-[95%] mx-auto h-max min-h-[300px] max-h-[560px] rounded-xl bg-background p-4 overflow-x-hidden overflow-y-scroll">
+      <motion.article
+        className="w-[95%] mx-auto h-max min-h-[300px] max-h-[560px] rounded-xl bg-background p-4 overflow-x-hidden overflow-y-scroll"
+        layout
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="w-full justify-end flex">
           <button className="bg-transparent" onClick={() => close(false)}>
             <FiX size={23} />
@@ -168,7 +163,7 @@ const Modal = ({
             })
           )}
         </div>
-      </article>
+      </motion.article>
     </div>
   );
 };

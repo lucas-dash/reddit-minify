@@ -11,6 +11,7 @@ import { setSubreddit } from './postsSlice';
 import { AppDispatch } from '../../app/store';
 import { useEffect, useState } from 'react';
 import Modal from '../comments/Modal';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Post = ({
   author,
@@ -37,7 +38,7 @@ const Post = ({
 
   return (
     <article className="min-w-[300px] w-full max-w-[740px] bg-background text-secondary p-4 rounded-2xl">
-      <div className="flex gap-3 items-center pb-4">
+      <motion.div className="flex gap-3 items-center pb-4" layout>
         <img
           src={`https://api.dicebear.com/6.x/personas/svg?seed=${author}`}
           alt={`${author} profile picture`}
@@ -58,7 +59,7 @@ const Post = ({
             {formatRelativeTime(created_utc)}
           </p>
         </div>
-      </div>
+      </motion.div>
 
       <div>
         {secure_media && secure_media.reddit_video && (
@@ -109,20 +110,22 @@ const Post = ({
           <FiMessageSquare size={20} style={{ color: 'black' }} />
           {commentFormater(num_comments)} comments
         </button>
-        {open && (
-          <Modal
-            close={setOpen}
-            permalink={permalink}
-            author={author}
-            created={created_utc}
-            title={title}
-            url={url}
-            secure_media={secure_media}
-            ups={ups}
-            num_comments={num_comments}
-            subreddit={subreddit}
-          />
-        )}
+        <AnimatePresence>
+          {open && (
+            <Modal
+              close={setOpen}
+              permalink={permalink}
+              author={author}
+              created={created_utc}
+              title={title}
+              url={url}
+              secure_media={secure_media}
+              ups={ups}
+              num_comments={num_comments}
+              subreddit={subreddit}
+            />
+          )}
+        </AnimatePresence>
         <button
           className="bg-bgButton rounded-md w-max py-1 px-3 text-details text-sm hover:bg-bgButton/80 active:scale-95 transition-all"
           onClick={() => dispatch(setSubreddit(`r/${subreddit}`))}

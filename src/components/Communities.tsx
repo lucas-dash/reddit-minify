@@ -4,7 +4,7 @@ import { setSubreddit } from '../features/posts/postsSlice';
 import { useGetCommunitiesQuery } from '../features/posts/postsSlice';
 import { CommunityType } from '../utils/types';
 
-const Communities = () => {
+const Communities = ({ handleClose }: { handleClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { data: communities, isLoading, isError } = useGetCommunitiesQuery('');
@@ -66,9 +66,10 @@ const Communities = () => {
                   </div>
                   <button
                     className="btn btn-xs btn-primary text-background"
-                    onClick={() =>
-                      dispatch(setSubreddit(data.display_name_prefixed))
-                    }
+                    onClick={() => {
+                      dispatch(setSubreddit(data.display_name_prefixed));
+                      handleClose();
+                    }}
                   >
                     Show
                   </button>
