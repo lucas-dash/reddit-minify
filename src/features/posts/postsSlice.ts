@@ -6,17 +6,23 @@ const postsSlice = createSlice({
   name: 'subreddit',
   initialState: {
     subreddit: 'r/popular',
+    searchTerm: '',
   },
   reducers: {
     setSubreddit: (state, action: PayloadAction<string>) => {
       state.subreddit = action.payload;
     },
+    setSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
 
-export const { setSubreddit } = postsSlice.actions;
+export const { setSubreddit, setSearchTerm } = postsSlice.actions;
 
 export const selectSubreddit = (state: RootState) => state.subreddit.subreddit;
+
+export const searchTerm = (state: RootState) => state.subreddit.searchTerm;
 
 export default postsSlice.reducer;
 

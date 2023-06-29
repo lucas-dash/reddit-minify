@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useGetSubredditQuery } from './postsSlice';
+import { searchTerm, useGetSubredditQuery } from './postsSlice';
 import { PostType } from '../../utils/types';
 import { selectSubreddit } from './postsSlice';
 import Post from './Post';
@@ -11,6 +11,7 @@ type apiPost = {
 
 const Posts = () => {
   const subreddit = useSelector(selectSubreddit);
+  const search = useSelector(searchTerm);
 
   const { data: Posts, isLoading, isError } = useGetSubredditQuery(subreddit);
 
@@ -44,11 +45,19 @@ const Posts = () => {
           <Loading />
           <Loading />
         </>
-      ) : (
+      ) : !search ? (
         Posts?.data.children.map((post: apiPost) => {
           const { data } = post;
 
           return <Post key={data.id} {...data} />;
+        })
+      ) : (
+        Posts?.data.children.map((post: apiPost) => {
+          const { data } = post;
+
+          if (data.title.toLowerCase().includes(search.toLowerCase())) {
+            return <Post key={data.id} {...data} />;
+          }
         })
       )}
     </section>

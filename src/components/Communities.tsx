@@ -4,13 +4,17 @@ import { setSubreddit } from '../features/posts/postsSlice';
 import { useGetCommunitiesQuery } from '../features/posts/postsSlice';
 import { CommunityType } from '../utils/types';
 
-const Communities = ({ handleClose }: { handleClose: () => void }) => {
+type CommunitiesPropType = {
+  handleClose?: () => void;
+};
+
+const Communities = ({ handleClose }: CommunitiesPropType) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { data: communities, isLoading, isError } = useGetCommunitiesQuery('');
 
   return (
-    <aside className="sticky top-20 text-secondary w-full min-w-[210px] max-w-[420px] max-h-[520px] bg-background rounded-[1rem] p-[10px] shadow-md ">
+    <aside className="sticky top-20 text-secondary w-full min-w-[220px] max-w-[420px] max-h-[520px] bg-background rounded-[1rem] p-[10px] shadow-md ">
       <h3 className="font-semibold text-lg">Top Communities</h3>
       <div className="flex flex-col gap-5 mt-4 mx-1">
         {isError && (
@@ -68,7 +72,9 @@ const Communities = ({ handleClose }: { handleClose: () => void }) => {
                     className="btn btn-xs btn-primary text-background"
                     onClick={() => {
                       dispatch(setSubreddit(data.display_name_prefixed));
-                      handleClose();
+                      if (handleClose) {
+                        handleClose();
+                      }
                     }}
                   >
                     Show
