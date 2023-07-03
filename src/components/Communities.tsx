@@ -3,6 +3,7 @@ import { AppDispatch } from '../app/store';
 import { setSubreddit } from '../features/posts/postsSlice';
 import { useGetCommunitiesQuery } from '../features/posts/postsSlice';
 import { CommunityType } from '../utils/types';
+import redditImg from '../assets/reddit.svg';
 
 type CommunitiesPropType = {
   handleClose?: () => void;
@@ -62,7 +63,11 @@ const Communities = ({ handleClose }: CommunitiesPropType) => {
                         className="w-5 h-5 rounded-full"
                       />
                     ) : (
-                      <div className="w-5 h-5 min-h-[1.25rem] min-w-[1.25rem] bg-blue-200 rounded-full"></div>
+                      <img
+                        src={redditImg}
+                        alt="default subreddit img"
+                        className="w-5 h-5 rounded-full"
+                      />
                     )}
                     <p className="font-medium text-ellipsis overflow-hidden whitespace-nowrap">
                       {data.display_name_prefixed}
