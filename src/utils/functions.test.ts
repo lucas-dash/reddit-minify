@@ -1,15 +1,18 @@
 import { describe, it } from 'vitest';
-import { commentFormater } from './functions';
+import { commentFormater, formatRelativeTime } from './functions';
 
-// describe('Func return formated timestamp in string', () => {
-//   it('should be 4 hours ago', () => {
-//     expect(formatRelativeTime(1686579201)).toBe('4 hours ago');
-//   });
+describe('Func return formated timestamp in string', () => {
+  it('should be 23 days ago', () => {
+    expect(formatRelativeTime(1686579201)).toBe('23 days ago');
+  });
 
-//   it('should be 14 hours ago', () => {
-//     expect(formatRelativeTime(1686542640)).toBe('14 hours ago');
-//   });
-// });
+  it('should be just now', () => {
+    expect(formatRelativeTime(1698926221)).toBe('just now');
+  });
+  it('should be 2 hours ago', () => {
+    expect(formatRelativeTime(1688579201)).toBe('2 hours ago');
+  });
+});
 
 describe('Func return prettier numbers', () => {
   it('should be 15K', () => {
